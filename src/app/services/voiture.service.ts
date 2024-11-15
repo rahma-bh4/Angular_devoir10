@@ -11,7 +11,7 @@ export class VoitureService {
   voitures : Voiture[]; 
   marques!:Marque[];
 voituresRecherche!:Voiture[];
-nextMarqueId: number;
+
 constructor() { 
   this.marques=[
     {idMarque:1,nomMarque:"Renault"},
@@ -24,7 +24,7 @@ this.voitures = [
   {idVoiture : 2,   nomVoiture : "BMW X5",  prixVoiture : 450000, dateCreation : new Date("12/17/2010"),marque:{idMarque:2, nomMarque:"BMW"},email:"bmw.help@bmw.com",enable:false}, 
      {idVoiture : 3,   nomVoiture :"Audi Q5", prixVoiture : 100000, dateCreation : new Date("02/20/2020"),marque:{idMarque:3, nomMarque:"Audi"},email:"audi.help@audi.com",enable:false}  
 ];
-this.nextMarqueId = this.marques.length + 1; 
+
 }
 listeVoitures(): Observable<Voiture[]> {
   return of(this.voitures);  
@@ -81,9 +81,11 @@ consulterVoiture(id:number): Voiture{
         return this.voituresRecherche;
       }
 
-  ajouterMarque( mar: Marque){
-    mar.idMarque = this.marques.length +1;
-    this.marques.push(mar);
+  ajouterMarque( mar: Marque):Marque{
+    const id=this.marques.length+1;
+    mar.idMarque = id;
+    this.marques.push({...mar});
+    return mar;
   }
         
 

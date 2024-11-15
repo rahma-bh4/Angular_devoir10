@@ -3,7 +3,7 @@
     <div class="card-body">
         <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
             <app-update-marque
-            [marque]="updateMar"
+            [marque]="updateMarque"
             (marqueUpdated)= "marqueUpdated($event)"
             [ajout]="ajout" >
             </app-update-marque>
@@ -13,8 +13,8 @@
     <thead>
     <tr> <th>Id</th><th>Marque </th> </tr>
     </thead>
-    <tbody *ngFor="let mar of marques">
-    <tr>
+    <tbody >
+    <tr *ngFor="let mar of marques">
     <td>{{mar.idMarque}}</td>
     <td>{{mar.nomMarque}}</td>
     <td><a class="btn btn-success" (click)="UpdateMar(mar)">Editer</a></td>

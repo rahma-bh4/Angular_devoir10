@@ -9,19 +9,24 @@ import { Marque } from '../model/marque.model';
 })
 export class ListeMarquesComponent implements OnInit {
   marques! : Marque[];
-  updateMar:Marque={"idMarque":0,"nomMarque":""};
+  updateMarque:Marque={"idMarque":0,"nomMarque":""};
   ajout:boolean=true;
 
   constructor(private voitureService : VoitureService) { }
   ngOnInit(): void {
- this.marques= this.voitureService.listeMarques();
+    this.chargerMarque();
   
 }
-marqueUpdated(cat:Marque){
+marqueUpdated(cat:Marque):void{
+  this.voitureService.ajouterMarque(cat); 
+  this.chargerMarque; // Recharge la liste des marques après ajout.
+  
+  /*this.voitureService.ajouterMarque(cat);
+  this.chargerMarque();
  /* console.log("Cat updated event",cat);
   this.voitureService.ajouterMarque(cat);
  this.chargerMarque();*/
- if (this.ajout) {
+ /*if (this.ajout) {
   // Si ajout est vrai, ajouter la marque
   this.voitureService.ajouterMarque(cat);
 } else {
@@ -31,15 +36,16 @@ marqueUpdated(cat:Marque){
    
   
 }
-this.chargerMarque();
-this.ajout = true; 
+this.chargerMarque();*/
+ 
   }
   
 chargerMarque(){
-  this.voitureService.listeMarques()
+  this.marques=this.voitureService.listeMarques();
+  console.log(this.marques);
 }
 UpdateMar(mar:Marque) {
-  this.updateMar=mar;
+  this.updateMarque=mar;
   this.ajout=false;
   }
   
